@@ -1,22 +1,42 @@
-import 'dart:ui_web' as ui_web;
 
 import 'package:flutter/material.dart';
-import 'package:web/web.dart' as html;
+import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class TestWebWidget extends StatelessWidget {
-  TestWebWidget({super.key}) {
-    ui_web.platformViewRegistry.registerViewFactory(
-      "webview1000",
-      (int viewId) => html.HTMLIFrameElement()
-        ..id = 'webview1000'
-        ..style.width = '100%'
-        ..style.height = '100%'
-        ..style.border = 'none',
-    );
-  }
+class PDFWidget extends HookWidget {
+  final String data;
+
+  const PDFWidget(this.data, { super.key });
 
   @override
   Widget build(BuildContext context) {
-    return const HtmlElementView(viewType: "webview1000");
+    final controller = useState(
+      WebViewController()
+        ..loadRequest(
+          Uri.parse("data:application/pdf;base64,$data"),
+        ),
+    );
+
+    return WebViewWidget(
+      controller: controller.value,
+    );
+  }
+}
+
+class SiteWidget extends HookWidget {
+  const SiteWidget({ super.key });
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = useState(
+      WebViewController()
+        ..loadRequest(
+          Uri.parse("http://localhost:8080"),
+        ),
+    );
+
+    return WebViewWidget(
+      controller: controller.value,
+    );
   }
 }

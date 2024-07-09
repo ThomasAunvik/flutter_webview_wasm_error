@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.0 <4.0.0'
+  sdk: '>=3.3.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -31,7 +31,17 @@ dependencies:
   flutter:
     sdk: flutter
     
+  flutter_hooks: ^0.20.5
   web: ^0.5.1
+  webview_flutter: ^4.8.0
+
+dependency_overrides:
+  webview_flutter_web:
+    git:
+      url: https://github.com/ThomasAunvik/flutter-packages.git
+      ref: fixwasmtests
+      path: packages/webview_flutter/webview_flutter_web
+
 
 dev_dependencies:
   flutter_test:
@@ -42,7 +52,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

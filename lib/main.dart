@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:webviewtest/data.dart';
 import 'package:webviewtest/webwidget.dart';
 
 void main() {
@@ -77,6 +79,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
+    bool isWeb = kIsWeb;
+
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -106,10 +111,69 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+             TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) {
+                      return Scaffold(
+                        appBar: AppBar(),
+                        body: const ColoredBox(
+                          color: Colors.blue,
+                          child:   
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: PDFWidget(pdf1data)
+                            )
+                        )
+                      );
+                    },
+                  ),
+                );
+              },
+              child: const Text("PDF 1"),
             ),
-            TestWebWidget(),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) {
+                      return Scaffold(
+                        appBar: AppBar(),
+                        body: const ColoredBox(
+                          color: Colors.green,
+                          child:   
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: PDFWidget(pdf2data)
+                            )
+                        )
+                      );
+                    },
+                  ),
+                );
+              },
+              child: const Text("PDF 2"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) {
+                      return Scaffold(
+                        appBar: AppBar(),
+                        body: const ColoredBox(
+                          color: Colors.green,
+                          child:   
+                            Padding(
+                              padding: EdgeInsets.all(10),
+                              child: SiteWidget()
+                            )
+                        )
+                      );
+                    },
+                  ),
+                );
+              },
+              child: const Text("Myself"),
+            ),
           ],
         ),
       ),
